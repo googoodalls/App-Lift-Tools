@@ -33,6 +33,8 @@ std::ostream & operator<<(std::ostream & stream, const offer_t & offer)
     else if  (device_all == offer.type) stream << "iOS";
     else assert(0);
     stream << "\"" << ", ";
+//    stream << offer.payout << ", ";
+
 //    stream << offer.itunes_id << ", ";
 //    stream << "\"" << offer.full_name << "\"" << ", ";
     stream << "\"" << offer.contries_str << "\"";
@@ -49,8 +51,6 @@ const char* offers_to_ban[] = {
     "Kabam Slots",
     "Poker",
 };
-
-
 
 bool parse_data(offer_t &offer, pugi::xml_node &node) {
     
@@ -158,12 +158,13 @@ bool parse_data(offer_t &offer, pugi::xml_node &node) {
 const char* offers_perform_great[] = {
     "Candy Crush Saga",
     "Dragon City Mobile",
-    "Hay Day",
+//    "Hay Day",
     "The Hobbit",
     "Pet Rescue Saga",
     "Megapolis",
-    "Four Kingdoms",
+//    "Four Kingdoms",
     "Marvel War",
+    "Spellstorm",
 };
 
 
@@ -171,7 +172,11 @@ struct ordering {
     bool operator ()(offer_t const& a, offer_t const& b) {
         if (a.itunes_id == b.itunes_id) return a.payout > b.payout;
         BOOST_FOREACH(const char* offer, offers_perform_great) {
-            if(boost::algorithm::ifind_first(a.full_name, offer)) return true;
+            if(boost::algorithm::ifind_first(a.full_name, offer)) {
+                if(boost::algorithm::ifind_first(b.full_name, offer)) return true;
+                return true;
+
+            }
             if(boost::algorithm::ifind_first(b.full_name, offer)) return false;
 
 //            if(a.itunes_id == offer.second) return true;
@@ -221,9 +226,8 @@ void load_data(pugi::xml_node nodes) {
     
     BOOST_FOREACH(offer_t &value, offs) {
         string file_name = value.name + "_small.jpg";
-        //file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
-        file_name = "C:\\thirdparty\\html\\iu_affiliate\\affiliate_img\\all_image\\" + file_name;
-
+        file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
+        value.image_exists = boost::filesystem::exists( file_name );
         if ( !boost::filesystem::exists( file_name ) ) {
             std::cout << value.name + "_small.jpg" << std::endl;
         }
@@ -232,6 +236,7 @@ void load_data(pugi::xml_node nodes) {
 
     
     BOOST_FOREACH(offer_t &value, offs) {
+        if (!value.image_exists) continue;
         cout << "offers[" << "_index++" << "] = new Array(";
         cout << value;
         cout << ")" << endl;
@@ -266,8 +271,8 @@ void load_data2(pugi::xml_node nodes) {
     
     BOOST_FOREACH(offer_t &value, all_offers) {
         string file_name = value.name + "_small.jpg";
-        //file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
-        file_name = "C:\\thirdparty\\html\\iu_affiliate\\affiliate_img\\all_image\\" + file_name;
+        file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
+        value.image_exists = boost::filesystem::exists( file_name );
         if ( !boost::filesystem::exists( file_name ) ) {
             std::cout << value.name + "_small.jpg" << std::endl;
         }
@@ -276,6 +281,7 @@ void load_data2(pugi::xml_node nodes) {
     
     
     BOOST_FOREACH(offer_t &value, all_offers) {
+        if (!value.image_exists) continue;
         cout << "[" ;
         cout << value;
         cout << "]," << endl;

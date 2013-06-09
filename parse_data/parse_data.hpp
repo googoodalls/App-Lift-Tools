@@ -3,7 +3,7 @@
 
 #include <string>
 #include <list>
-#include "../../src/pugixml.hpp"
+#include "pugixml.hpp"
 
 enum device_type
 {
@@ -24,6 +24,7 @@ struct offer_t{
     std::list<std::string> contries;
     std::string contries_str;
     device_type type;
+    bool image_exists;
 };
 
 

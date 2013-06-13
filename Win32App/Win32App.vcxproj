@@ -54,8 +54,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\thirdparty\vs2012\x86\boost_1_53_0; ././parse_data;././src</AdditionalIncludeDirectories>
-      <AdditionalOptions>/D "_SCL_SECURE_NO_WARNINGS" /D "_CRT_SECURE_NO_WARNINGS" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\thirdparty\vs2012\x86\boost_1_53_0;$(MSBuildStartupDirectory)\parse_data;$(MSBuildStartupDirectory)\src</AdditionalIncludeDirectories>
+      <AdditionalOptions>/D "_SCL_SECURE_NO_WARNINGS" /D "_CRT_SECURE_NO_WARNINGS" /D "__WIN32__" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

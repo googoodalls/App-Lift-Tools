@@ -1,2 +1,2 @@
 #include "stdafx.h"
-#include "../../src/pugixml.cpp"
+#include "pugixml.cpp"

@@ -46,7 +46,7 @@ std::ostream & operator<<(std::ostream & stream, const offer_t & offer)
 
 
 const char* offers_to_ban[] = {
-    "Immortalis",
+//    "Immortalis",
     "Casino Games",
     "Kabam Slots",
     "Poker",
@@ -112,7 +112,12 @@ bool parse_data(offer_t &offer, pugi::xml_node &node) {
             split( SplitVec, itunes_url, is_any_of("?") );
             SplitVec[0].erase(boost::remove_if(SplitVec[0], !boost::is_digit()), SplitVec[0].end());
 //            std::cout << SplitVec[0] << endl;
-            offer.itunes_id = lexical_cast<int>(SplitVec[0]);
+            try {
+                offer.itunes_id = lexical_cast<int>(SplitVec[0]);
+
+            } catch (...) {
+                offer.itunes_id = -1;
+            }
 
         }
         else if (boost::algorithm::ifind_first(name, "id")) {
@@ -158,12 +163,13 @@ bool parse_data(offer_t &offer, pugi::xml_node &node) {
 const char* offers_perform_great[] = {
     "Candy Crush Saga",
     "Dragon City Mobile",
-//    "Hay Day",
     "The Hobbit",
+    "Marvel War",
     "Pet Rescue Saga",
     "Megapolis",
 //    "Four Kingdoms",
-    "Marvel War",
+    "Immortalis",
+    "Hay Day",
     "Spellstorm",
 };
 

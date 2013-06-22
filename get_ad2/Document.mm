@@ -22,7 +22,11 @@
     if (self) {
         // Add your subclass-specific initialization here.
     }
+    
+    
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://partner.applift.com/offers/offers.xml?api_key=AFFX1FHk7x39ewkWdJGcaAP3PxwROI"]];
+//    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://yeahmobi.hasoffers.com/offers/offers.xml?api_key=AFFpcGPq4qRXtplXEHRCOlzr8Z5n2a"]];
+
     //    NSLog(@"%s", [data bytes]);
     
     pugi::xml_document doc;

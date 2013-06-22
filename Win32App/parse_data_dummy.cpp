@@ -1,4 +1,4 @@
 #include "stdafx.h"
-#include "../../parse_data/parse_data.cpp"
+#include "parse_data.cpp"
 
 

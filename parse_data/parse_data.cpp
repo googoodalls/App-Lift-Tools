@@ -232,7 +232,11 @@ void load_data(pugi::xml_node nodes) {
     
     BOOST_FOREACH(offer_t &value, offs) {
         string file_name = value.name + "_small.jpg";
+#ifndef __WIN32__
         file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
+#else
+        file_name = "C:\\thirdparty\\html\\iu_affiliate\\affiliate_img\\all_image\\" + file_name;
+#endif
         value.image_exists = boost::filesystem::exists( file_name );
         if ( !boost::filesystem::exists( file_name ) ) {
             std::cout << value.name + "_small.jpg" << std::endl;
@@ -277,7 +281,11 @@ void load_data2(pugi::xml_node nodes) {
     
     BOOST_FOREACH(offer_t &value, all_offers) {
         string file_name = value.name + "_small.jpg";
+#ifndef __WIN32__
         file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
+#else
+        file_name = "C:\\thirdparty\\html\\iu_affiliate\\affiliate_img\\all_image\\" + file_name;
+#endif
         value.image_exists = boost::filesystem::exists( file_name );
         if ( !boost::filesystem::exists( file_name ) ) {
             std::cout << value.name + "_small.jpg" << std::endl;

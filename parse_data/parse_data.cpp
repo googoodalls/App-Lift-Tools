@@ -228,15 +228,15 @@ void load_data(pugi::xml_node nodes) {
     
     boost::sort(offs, ordering());
     
-//    /Users/wuheshun/html/iu_affiliate/affiliate_img/all_image
-    
     BOOST_FOREACH(offer_t &value, offs) {
         string file_name = value.name + "_small.jpg";
 #ifndef __WIN32__
-        file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
+        file_name = "/Users/wuheshun/iu_affiliate/affiliate_img/all_image/" + file_name;
+        //file_name = "/Users/cjwn/Google 云端硬盘/iOS/S3_Amazon/affiliate_img/all_image/" + file_name;
 #else
         file_name = "C:\\thirdparty\\html\\iu_affiliate\\affiliate_img\\all_image\\" + file_name;
 #endif
+        
         value.image_exists = boost::filesystem::exists( file_name );
         if ( !boost::filesystem::exists( file_name ) ) {
             std::cout << value.name + "_small.jpg" << std::endl;
@@ -283,6 +283,7 @@ void load_data2(pugi::xml_node nodes) {
         string file_name = value.name + "_small.jpg";
 #ifndef __WIN32__
         file_name = "/Users/wuheshun/html/iu_affiliate/affiliate_img/all_image/" + file_name;
+        //file_name = "/Users/cjwn/Google 云端硬盘/iOS/S3_Amazon/affiliate_img/all_image/" + file_name;
 #else
         file_name = "C:\\thirdparty\\html\\iu_affiliate\\affiliate_img\\all_image\\" + file_name;
 #endif
